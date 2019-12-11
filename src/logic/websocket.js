@@ -22,3 +22,10 @@ function launchWebSocket() {
     alert("Your browser doesn't support WebSockets. Lol.");
   }
 }
+
+export default {
+  name: "websocket",
+  methods: {
+    launchWebSocket
+  }
+};
