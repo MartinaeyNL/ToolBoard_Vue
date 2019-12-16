@@ -11,18 +11,28 @@
         <v-flex xs12 sm9 md7 lg5 xl4>
           <v-layout row wrap align-center>
             <v-flex xs12 sm6 md6 lg6 xl6>
-              <v-autocomplete :items="items" label="Add Component.." style="width: 90%; margin-top: 24px;">
-
-              </v-autocomplete>
+              <v-autocomplete
+                style="width: 90%; margin-top: 24px;"
+                :items="items"
+                label="Add Component"
+              ></v-autocomplete>
             </v-flex>
             <v-flex xs6 sm3 md3 lg3 xl3>
-              <v-btn color="blue darken-3" class="elevation-0" style="overflow: hidden;">
+              <v-btn
+                color="blue darken-3"
+                class="elevation-0"
+                style="overflow: hidden;"
+              >
                 <v-icon style="margin-right: 2px;">mdi-lan-connect</v-icon>
                 <span style="margin-left: 2px;">Connect</span>
               </v-btn>
             </v-flex>
             <v-flex xs6 sm3 md3 lg3 xl3>
-              <v-btn color="blue darken-3" class="elevation-0" style="overflow: hidden;">
+              <v-btn
+                color="blue darken-3"
+                class="elevation-0"
+                style="overflow: hidden;"
+              >
                 <v-icon style="margin-right: 2px;">mdi-settings</v-icon>
                 <span style="margin-left: 2px;">Settings</span>
               </v-btn>
@@ -31,15 +41,14 @@
         </v-flex>
       </v-layout>
     </v-app-bar>
-    <v-content></v-content>
+    <v-content style="margin-top: 200px;"></v-content>
   </v-app>
 </template>
 
 <style>
 .buttonCard {
-  padding: 0 !important
+  padding: 0 !important;
 }
-
 </style>
 
 <script>
