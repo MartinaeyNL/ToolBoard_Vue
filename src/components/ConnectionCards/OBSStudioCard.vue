@@ -1,0 +1,71 @@
+<template>
+  <v-card color="rgb(22, 36, 88, 0.8)" style="margin: 4%;">
+    <v-img
+      src="https://obsproject.com/assets/images/new_icon_small.png"
+      aspect-ratio="1"
+      height="128"
+      width="128"
+      style="float: right; position: relative; margin: 2% 2% 0 0;"
+    ></v-img>
+    <v-card-title>OBS Studio</v-card-title>
+    <v-card-subtitle>
+      <span
+        >Adds support for quality statistics,<br />
+        starting and stopping the stream,<br />
+        switching scenes, and many more.</span
+      >
+    </v-card-subtitle>
+    <v-card-actions>
+      <v-layout wrap>
+        <v-flex xs8 sm8 md8 lg8 xl8 style="padding-right: 12px;">
+          <v-text-field
+            prepend-icon="mdi-web"
+            placeholder="IP Address"
+            single-line
+            :value="address"
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs4 sm4 md4 lg4 xl4 style="padding-left: 12px;">
+          <v-text-field
+            placeholder="Port"
+            single-line
+            :value="port"
+            maxlength="5"
+          >
+          </v-text-field>
+        </v-flex>
+        <v-flex xs12 sm12 md12 lg12 xl12>
+          <v-layout align-center>
+            <v-flex xs4 sm4 md4 lg4 xl4>
+              <v-btn color="green darken-3">Connect</v-btn>
+            </v-flex>
+            <v-flex xs8 sm8 md8 lg8 xl8>
+              <div>
+                <v-icon color="grey">mdi-information</v-icon>
+                <v-label>You've already connected!</v-label>
+              </div>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+      </v-layout>
+    </v-card-actions>
+    <!--https://obsproject.com/assets/images/new_icon_small.png-->
+  </v-card>
+</template>
+
+<script>
+//import websocket from "../logic/websocket.js";
+export default {
+  data: () => ({
+    address: "",
+    port: 4444
+  })
+};
+</script>
+
+<style>
+.cardTransparent {
+  background-color: rgb(22, 36, 88, 0.3) !important;
+  border-color: transparent !important;
+}
+</style>

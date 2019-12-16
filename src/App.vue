@@ -22,6 +22,7 @@
                 color="blue darken-3"
                 class="elevation-0"
                 style="overflow: hidden;"
+                @click="connectionsOverlay = !connectionsOverlay"
               >
                 <v-icon style="margin-right: 2px;">mdi-lan-connect</v-icon>
                 <span style="margin-left: 2px;">Connect</span>
@@ -41,6 +42,16 @@
         </v-flex>
       </v-layout>
     </v-app-bar>
+    <v-overlay :value="connectionsOverlay">
+      <ConnectionsOverlay />
+      <v-layout row wrap>
+        <v-flex class="text-xs-center">
+          <v-btn @click="connectionsOverlay = false" style="margin-top: 50px;"
+            >Close</v-btn
+          >
+        </v-flex>
+      </v-layout>
+    </v-overlay>
     <v-content style="margin-top: 200px;"></v-content>
   </v-app>
 </template>
@@ -53,11 +64,12 @@
 
 <script>
 import Home from "../src/views/Home.vue";
+import ConnectionsOverlay from "../src/components/ConnectionsOverlay.vue";
 export default {
   name: "App",
-  components: { Home },
+  components: { Home, ConnectionsOverlay },
   data: () => ({
-    //
+    connectionsOverlay: false
   })
 };
 </script>
