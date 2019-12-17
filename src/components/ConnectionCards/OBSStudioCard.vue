@@ -23,6 +23,7 @@
             placeholder="IP Address"
             single-line
             :value="address"
+            @change="address = $event"
           ></v-text-field>
         </v-flex>
         <v-flex xs4 sm4 md4 lg4 xl4 style="padding-left: 12px;">
@@ -30,6 +31,7 @@
             placeholder="Port"
             single-line
             :value="port"
+            @change="port = $event"
             maxlength="5"
           >
           </v-text-field>
@@ -37,7 +39,12 @@
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
             <v-flex xs4 sm4 md4 lg4 xl4>
-              <v-btn color="green darken-3">Connect</v-btn>
+              <v-btn
+                color="green darken-3"
+                @click="launchWebSocket"
+                :disabled="!socketIsClosed || !socketIsNull"
+                >Connect</v-btn
+              >
             </v-flex>
             <v-flex xs8 sm8 md8 lg8 xl8>
               <div>
@@ -54,12 +61,37 @@
 </template>
 
 <script>
-//import websocket from "../logic/websocket.js";
+import websocket from "../../logic/websocket.js";
 export default {
   data: () => ({
-    address: "",
+    address: "localhost",
     port: 4444
-  })
+  }),
+  methods: {
+    launchWebSocket() {
+      if (this.address != "" && this.port != "") {
+        websocket.methods.launchWebSocket(this.address, this.port);
+      } else {
+        alert(
+          "Invalid IP Address and/or Port [" +
+            this.address +
+            "][" +
+            this.port +
+            "]"
+        );
+      }
+    },
+    socketIsClosed() {
+      var isClosed = websocket.methods.isClosed();
+      alert("The close state of the socket is [" + isClosed + "]");
+      return isClosed;
+    },
+    socketIsNull() {
+      var isNull = websocket.methods.isNull();
+      alert("The close state of the socket is [" + isNull + "]");
+      return isNull;
+    }
+  }
 };
 </script>
 

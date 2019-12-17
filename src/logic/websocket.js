@@ -2,12 +2,12 @@ import { isNullOrUndefined } from "util";
 
 var socket;
 
-function launchWebSocket() {
+function launchWebSocket(host, port) {
   // Check if browser supports websocket
   if ("WebSocket" in window) {
     // And when the websocket isn't created yet
     if (isNullOrUndefined(socket)) {
-      socket = new WebSocket("ws://localhost:4444");
+      socket = new WebSocket("ws://" + host + ":" + port);
       // When opening
       socket.onopen = function() {
         alert("The connection is ready!");
@@ -63,11 +63,21 @@ function isJSON(input) {
   }
 }
 
+function isClosed() {
+  return this.socket.readyState == WebSocket.CLOSED;
+}
+
+function isNull() {
+  return this.socket == null;
+}
+
 export default {
   name: "websocket",
   methods: {
     launchWebSocket,
     sendMessage,
-    isJSON
+    isJSON,
+    isClosed,
+    isNull
   }
 };
