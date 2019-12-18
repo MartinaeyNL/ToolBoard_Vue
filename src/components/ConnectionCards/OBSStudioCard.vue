@@ -69,18 +69,19 @@ export default {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route == "") {
         if (this.$store.getters.webSocketOBS == null) {
-          var obsWebSocket = websocket.methods.launchWebSocket(
+          websocket.methods.launchWebSocket(
             this.address,
             this.port,
-            this.route
+            this.route,
+            this.$store,
+            "WebSocketOBS"
           );
-          obsWebSocket.onclose = function() {
-            alert("Closed the connection :(");
-            this.$store.commit("setWebSocketOBS", null);
-          };
-          this.$store.commit("setWebSocketOBS", obsWebSocket);
         } else {
-          alert("You already got a connection!");
+          alert(
+            "You already got a connection! [" +
+              this.$store.getters.webSocketOBS +
+              "]"
+          );
         }
       } else {
         alert("Invalid IP Address and/or Port!");

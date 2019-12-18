@@ -1,18 +1,24 @@
 import { isNullOrUndefined } from "util";
 
-function launchWebSocket(host, port, route) {
+function launchWebSocket(host, port, route, store, type) {
   // Check if browser supports websocket
   var socket = null;
   if ("WebSocket" in window) {
     socket = new WebSocket("ws://" + host + ":" + port + route);
     // When opening
     socket.onopen = function() {
+      store.commit("setWebSocketOBS", socket);
       alert("The connection is ready!");
+      alert("[" + store.getters.webSocketOBS + "] & type = [" + type + "]");
     };
-
     // When it receives a message
     socket.onmessage = function(evt) {
       alert("Received the message: [" + evt.data + "]");
+    };
+    socket.onclose = function() {
+      store.commit("setWebSocketOBS", null);
+      alert("Closed the connection :(");
+      alert("[" + store.getters.webSocketOBS + "] & type = [" + type + "]");
     };
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
@@ -22,8 +28,6 @@ function launchWebSocket(host, port, route) {
   window.onbeforeunload = function() {
     this.socket.close();
   };
-
-  return socket;
 }
 
 /*--------------------------------------------------------------------*/
