@@ -74,14 +74,10 @@ export default {
             this.port,
             this.route,
             this.$store,
-            "WebSocketOBS"
+            "setWebSocketOBS"
           );
         } else {
-          alert(
-            "You already got a connection! [" +
-              this.$store.getters.webSocketOBS +
-              "]"
-          );
+          alert("You already got a connection!");
         }
       } else {
         alert("Invalid IP Address and/or Port!");

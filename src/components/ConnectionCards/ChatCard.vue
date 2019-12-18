@@ -56,23 +56,16 @@ export default {
   methods: {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route != "") {
-        if (this.$store.getters.webSocketChat == "") {
-          var chatWebSocket = websocket.methods.launchWebSocket(
+        if (this.$store.getters.webSocketChat == null) {
+          websocket.methods.launchWebSocket(
             this.address,
             this.port,
-            this.route
+            this.route,
+            this.$store,
+            "setWebSocketChat"
           );
-          chatWebSocket.onclose = function() {
-            alert("Closed the connection :(");
-            this.$store.commit("setWebSocketChat", " ");
-          };
-          this.$store.commit("setWebSocketChat", chatWebSocket);
         } else {
-          alert(
-            "You already got a connection! [" +
-              this.$store.getters.webSocketChat +
-              "]"
-          );
+          alert("You already got a connection!");
         }
       } else {
         alert("Invalid IP Address and/or Port!");
