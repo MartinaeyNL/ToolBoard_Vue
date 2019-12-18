@@ -39,10 +39,7 @@
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
             <v-flex xs5 sm5 md5 lg5 xl5>
-              <v-btn
-                color="green darken-3"
-                @click="launchWebSocket"
-                :disabled="!socketIsClosed || !socketIsNull"
+              <v-btn color="green darken-3" @click="launchWebSocket"
                 >Connect</v-btn
               >
             </v-flex>
@@ -66,35 +63,28 @@ export default {
   data: () => ({
     address: "localhost",
     port: 4444,
-    obsWebSocket: null
+    route: ""
   }),
   methods: {
     launchWebSocket() {
-      if (this.address != "" && this.port != "") {
-        this.obsWebSocket = websocket.methods.launchWebSocket(
-          this.address,
-          this.port,
-          ""
-        );
+      if (this.address != "" && this.port != "" && this.route == "") {
+        if (this.$store.getters.webSocketOBS == null) {
+          var obsWebSocket = websocket.methods.launchWebSocket(
+            this.address,
+            this.port,
+            this.route
+          );
+          obsWebSocket.onclose = function() {
+            alert("Closed the connection :(");
+            this.$store.commit("setWebSocketOBS", null);
+          };
+          this.$store.commit("setWebSocketOBS", obsWebSocket);
+        } else {
+          alert("You already got a connection!");
+        }
       } else {
-        alert(
-          "Invalid IP Address and/or Port [" +
-            this.address +
-            "][" +
-            this.port +
-            "]"
-        );
+        alert("Invalid IP Address and/or Port!");
       }
-    },
-    socketIsClosed() {
-      var isClosed = websocket.methods.isClosed();
-      alert("The close state of the socket is [" + isClosed + "]");
-      return isClosed;
-    },
-    socketIsNull() {
-      var isNull = websocket.methods.isNull();
-      alert("The close state of the socket is [" + isNull + "]");
-      return isNull;
     }
   }
 };

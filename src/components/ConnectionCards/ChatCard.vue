@@ -51,27 +51,27 @@ export default {
   data: () => ({
     address: "localhost",
     port: 8096,
-    route: "/toolboard/",
-    chatWebSocket: null
+    route: "/toolboard/"
   }),
   methods: {
     launchWebSocket() {
-      if (this.address != "" && this.port != "" && this.route) {
-        this.chatWebSocket = websocket.methods.launchWebSocket(
-          this.address,
-          this.port,
-          this.route
-        );
+      if (this.address != "" && this.port != "" && this.route != "") {
+        if (this.$store.getters.webSocketChat == null) {
+          var chatWebSocket = websocket.methods.launchWebSocket(
+            this.address,
+            this.port,
+            this.route
+          );
+          chatWebSocket.onclose = function() {
+            alert("Closed the connection :(");
+            this.$store.commit("setWebSocketChat", null);
+          };
+          this.$store.commit("setWebSocketChat", chatWebSocket);
+        } else {
+          alert("You already got a connection!");
+        }
       } else {
-        alert(
-          "Invalid IP Address and/or Port [" +
-            this.address +
-            ":" +
-            this.port +
-            "/" +
-            this.route +
-            "]"
-        );
+        alert("Invalid IP Address and/or Port!");
       }
     },
     socketIsClosed() {
