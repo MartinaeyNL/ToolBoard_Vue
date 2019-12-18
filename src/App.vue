@@ -52,7 +52,7 @@
         </v-flex>
       </v-layout>
     </v-overlay>
-    <v-content style="margin-top: 200px;"></v-content>
+    <v-content style="margin-bottom: 200px;"> </v-content>
   </v-app>
 </template>
 

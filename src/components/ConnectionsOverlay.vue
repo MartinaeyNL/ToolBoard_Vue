@@ -4,7 +4,7 @@
       <OBSStudioCard />
     </v-flex>
     <v-flex xs6 sm6 md4 lg4 xl3>
-      <OBSStudioCard />
+      <TwitchCard />
     </v-flex>
     <v-flex xs6 sm6 md4 lg4 xl3>
       <OBSStudioCard />
@@ -15,10 +15,12 @@
 <script>
 //import websocket from "../logic/websocket.js";
 import OBSStudioCard from "../components/ConnectionCards/OBSStudioCard.vue";
+import TwitchCard from "../components/ConnectionCards/TwitchCard.vue";
 export default {
   components: {
     //websocket,
-    OBSStudioCard
+    OBSStudioCard,
+    TwitchCard
   }
 };
 </script>

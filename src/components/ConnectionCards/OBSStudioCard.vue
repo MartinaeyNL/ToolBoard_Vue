@@ -38,7 +38,7 @@
         </v-flex>
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
-            <v-flex xs4 sm4 md4 lg4 xl4>
+            <v-flex xs5 sm5 md5 lg5 xl5>
               <v-btn
                 color="green darken-3"
                 @click="launchWebSocket"
@@ -46,7 +46,7 @@
                 >Connect</v-btn
               >
             </v-flex>
-            <v-flex xs8 sm8 md8 lg8 xl8>
+            <v-flex xs7 sm7 md7 lg7 xl7>
               <div>
                 <v-icon color="grey">mdi-information</v-icon>
                 <v-label>You've already connected!</v-label>

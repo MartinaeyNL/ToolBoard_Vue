@@ -21,6 +21,7 @@ function launchWebSocket(host, port) {
       // When closing
       socket.onclose = function() {
         alert("Closed the connection :(");
+        socket = null;
       };
     } else {
       alert("You've already got a connection!");
