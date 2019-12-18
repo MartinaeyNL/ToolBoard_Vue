@@ -1,43 +1,29 @@
 <template>
-  <v-card color="rgb(22, 36, 88, 0.8)" style="margin: 4%;">
+  <v-card color="pink darken-1" style="margin: 4%;">
     <v-img
-      src="https://obsproject.com/assets/images/new_icon_small.png"
+      src="https://image.flaticon.com/icons/png/512/1798/1798529.png"
       aspect-ratio="1"
       height="128"
       width="128"
       style="float: right; position: relative; margin: 2% 2% 0 0;"
     ></v-img>
-    <v-card-title>OBS Studio</v-card-title>
+    <v-card-title>Streamer Rooms</v-card-title>
     <v-card-subtitle>
       <span
-        >Adds support for quality statistics,<br />
-        starting and stopping the stream,<br />
-        switching scenes, and many more.</span
+        >Special feature where you can chat<br />
+        and share information with other streamers<br />
+        such as settings and stats.</span
       >
     </v-card-subtitle>
     <v-card-actions>
       <v-layout wrap>
-        <v-flex xs8 sm8 md8 lg8 xl8 style="padding-right: 12px;">
-          <v-text-field
-            prepend-icon="mdi-web"
-            placeholder="IP Address"
-            single-line
-            :value="address"
-            @change="address = $event"
-          ></v-text-field>
-        </v-flex>
-        <v-flex xs4 sm4 md4 lg4 xl4 style="padding-left: 12px;">
-          <v-text-field
-            placeholder="Port"
-            single-line
-            :value="port"
-            @change="port = $event"
-            maxlength="5"
-          >
-          </v-text-field>
-        </v-flex>
         <v-flex xs12 sm12 md12 lg12 xl12>
-          <v-layout align-center>
+          <v-layout wrap align-center>
+            <v-flex xs12 sm12 md12 lg12 xl12>
+              <div>
+                <v-switch label="Launch on Startup"></v-switch>
+              </div>
+            </v-flex>
             <v-flex xs5 sm5 md5 lg5 xl5>
               <v-btn
                 color="green darken-3"
@@ -48,7 +34,7 @@
             </v-flex>
             <v-flex xs7 sm7 md7 lg7 xl7>
               <div>
-                <v-icon color="grey">mdi-information</v-icon>
+                <v-icon color="grey lighten-2">mdi-information</v-icon>
                 <v-label>You've already connected!</v-label>
               </div>
             </v-flex>
@@ -56,7 +42,6 @@
         </v-flex>
       </v-layout>
     </v-card-actions>
-    <!--https://obsproject.com/assets/images/new_icon_small.png-->
   </v-card>
 </template>
 
@@ -65,23 +50,26 @@ import websocket from "../../logic/websocket.js";
 export default {
   data: () => ({
     address: "localhost",
-    port: 4444,
-    obsWebSocket: null
+    port: 8096,
+    route: "/toolboard/",
+    chatWebSocket: null
   }),
   methods: {
     launchWebSocket() {
-      if (this.address != "" && this.port != "") {
-        this.obsWebSocket = websocket.methods.launchWebSocket(
+      if (this.address != "" && this.port != "" && this.route) {
+        this.chatWebSocket = websocket.methods.launchWebSocket(
           this.address,
           this.port,
-          ""
+          this.route
         );
       } else {
         alert(
           "Invalid IP Address and/or Port [" +
             this.address +
-            "][" +
+            ":" +
             this.port +
+            "/" +
+            this.route +
             "]"
         );
       }

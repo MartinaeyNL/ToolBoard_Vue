@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(100, 65, 164, 0.8) darken-2" style="margin: 4%;">
+  <v-card color="rgb(100, 65, 164, 0.8)" style="margin: 4%;">
     <v-img
       src="https://seeklogo.com/images/T/twitch-logo-4931D91F85-seeklogo.com.png"
       aspect-ratio="1"

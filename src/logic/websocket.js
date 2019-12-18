@@ -1,31 +1,25 @@
 import { isNullOrUndefined } from "util";
 
-var socket;
-
-function launchWebSocket(host, port) {
+function launchWebSocket(host, port, route) {
   // Check if browser supports websocket
   if ("WebSocket" in window) {
-    // And when the websocket isn't created yet
-    if (isNullOrUndefined(socket)) {
-      socket = new WebSocket("ws://" + host + ":" + port);
-      // When opening
-      socket.onopen = function() {
-        alert("The connection is ready!");
-      };
+    var socket = new WebSocket("ws://" + host + ":" + port + route);
+    // When opening
+    socket.onopen = function() {
+      alert("The connection is ready!");
+    };
 
-      // When it receives a message
-      socket.onmessage = function(evt) {
-        alert("Received the message: [" + evt.data + "]");
-      };
+    // When it receives a message
+    socket.onmessage = function(evt) {
+      alert("Received the message: [" + evt.data + "]");
+    };
 
-      // When closing
-      socket.onclose = function() {
-        alert("Closed the connection :(");
-        socket = null;
-      };
-    } else {
-      alert("You've already got a connection!");
-    }
+    // When closing
+    socket.onclose = function() {
+      alert("Closed the connection :(");
+      socket = null;
+    };
+    return socket;
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
   }
@@ -38,7 +32,7 @@ function launchWebSocket(host, port) {
 
 /*--------------------------------------------------------------------*/
 
-function sendMessage(message) {
+function sendMessage(socket, message) {
   if (socket != null) {
     var finalMessage = JSON.stringify(message);
     if (!isNullOrUndefined(finalMessage)) {

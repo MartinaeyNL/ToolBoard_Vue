@@ -7,7 +7,7 @@
       <TwitchCard />
     </v-flex>
     <v-flex xs6 sm6 md4 lg4 xl3>
-      <OBSStudioCard />
+      <ChatCard />
     </v-flex>
   </v-layout>
 </template>
@@ -16,11 +16,13 @@
 //import websocket from "../logic/websocket.js";
 import OBSStudioCard from "../components/ConnectionCards/OBSStudioCard.vue";
 import TwitchCard from "../components/ConnectionCards/TwitchCard.vue";
+import ChatCard from "../components/ConnectionCards/ChatCard.vue";
 export default {
   components: {
     //websocket,
     OBSStudioCard,
-    TwitchCard
+    TwitchCard,
+    ChatCard
   }
 };
 </script>
