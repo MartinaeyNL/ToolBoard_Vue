@@ -51,7 +51,7 @@ export default {
   data: () => ({
     address: "localhost",
     port: 8096,
-    route: "/toolboard/"
+    route: "/streamerchat/"
   }),
   methods: {
     launchWebSocket() {
