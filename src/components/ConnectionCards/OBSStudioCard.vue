@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(22, 36, 88, 0.8)" style="margin: 4%;">
+  <v-card color="rgb(22, 36, 88, 0.8)">
     <v-img
       src="https://obsproject.com/assets/images/new_icon_small.png"
       aspect-ratio="1"

@@ -1,5 +1,5 @@
 <template>
-  <v-card color="pink darken-1" style="margin: 4%;">
+  <v-card color="pink darken-1">
     <v-img
       src="https://image.flaticon.com/icons/png/512/1798/1798529.png"
       aspect-ratio="1"
