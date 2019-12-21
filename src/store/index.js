@@ -18,8 +18,8 @@ export default new Vuex.Store({
   },*/
   state() {
     const logos = {
-      1: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-      2: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+      1: "https://obsproject.com/assets/images/new_icon_small.png",
+      2: "https://image.flaticon.com/icons/png/128/491/491555.png", // https://image.flaticon.com/icons/png/128/331/331310.png
       3: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
       4: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
       5: "https://cdn.vuetifyjs.com/images/lists/5.jpg"
@@ -47,6 +47,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    availableComponents: state => state.availableComponents,
     detailedComponentList: state => state.detailedComponentList,
     webSocketOBS: state => state.webSocketOBS,
     webSocketChat: state => state.webSocketChat

@@ -24,7 +24,7 @@
       <template v-slot:item="data">
         <template>
           <v-list-item-avatar>
-            <img :src="data.item.avatar" />
+            <img :src="data.item.picture" />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title>
