@@ -8,10 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    availableComponents: {
-      CHAT_CARD: ChatCard,
-      OBSSTUDIO_CARD: OBSStudioCard
-    },
+    availableComponents: [ChatCard, OBSStudioCard],
     webSocketOBS: null,
     webSocketChat: null
   },
