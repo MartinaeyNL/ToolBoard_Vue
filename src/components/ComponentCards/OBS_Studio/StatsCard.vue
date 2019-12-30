@@ -7,7 +7,7 @@
 export default {
   methods: {
     websocketIsNull() {
-      return this.$store.getters.webSocketOBSIsNull;
+      return this.$store.getters.webSocketOBS_IsNull;
     }
   }
 };
