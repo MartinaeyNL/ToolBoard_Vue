@@ -9,7 +9,9 @@
     </span>
     <v-layout row wrap>
       <v-flex md4 v-for="item in this.activeComponents" :key="item.name">
-        <v-card>{{ item.name }}</v-card>
+        <v-card>
+          <component v-bind:is="item.card"></component>
+        </v-card>
       </v-flex>
     </v-layout>
   </div>
