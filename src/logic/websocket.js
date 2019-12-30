@@ -28,6 +28,8 @@ function launchWebSocket(host, port, route, store, mutation) {
   window.onbeforeunload = function() {
     this.socket.close();
   };
+
+  return socket;
 }
 
 /*--------------------------------------------------------------------*/

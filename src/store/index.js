@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import ChatCard from "../components/ConnectionCards/ChatCard.vue";
-import OBSStudioCard from "../components/ConnectionCards/OBSStudioCard.vue";
+import ChatCard from "@/components/ConnectionCards/ChatCard.vue";
+import OBSStudioCard from "@/components/ComponentCards/OBS_Studio/StatsCard.vue";
 
 Vue.use(Vuex);
 

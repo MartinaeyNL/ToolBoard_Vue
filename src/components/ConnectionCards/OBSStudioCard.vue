@@ -9,11 +9,11 @@
     ></v-img>
     <v-card-title>OBS Studio</v-card-title>
     <v-card-subtitle>
-      <span
-        >Adds support for quality statistics,<br />
-        starting and stopping the stream,<br />
-        switching scenes, and many more.</span
-      >
+      <span>
+        Adds support for quality statistics,
+        <br />starting and stopping the stream,
+        <br />switching scenes, and many more.
+      </span>
     </v-card-subtitle>
     <v-card-actions>
       <v-layout wrap>
@@ -33,15 +33,12 @@
             :value="port"
             @change="port = $event"
             maxlength="5"
-          >
-          </v-text-field>
+          ></v-text-field>
         </v-flex>
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
             <v-flex xs5 sm5 md5 lg5 xl5>
-              <v-btn color="green darken-3" @click="launchWebSocket"
-                >Connect</v-btn
-              >
+              <v-btn color="green darken-3" @click="launchWebSocket">Connect</v-btn>
             </v-flex>
             <v-flex xs7 sm7 md7 lg7 xl7>
               <div>
@@ -69,13 +66,14 @@ export default {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route == "") {
         if (this.$store.getters.webSocketOBS == null) {
-          websocket.methods.launchWebSocket(
+          var socket = websocket.methods.launchWebSocket(
             this.address,
             this.port,
             this.route,
             this.$store,
             "setWebSocketOBS"
           );
+          this.$store.commit("setWebSocketOBS", socket);
         } else {
           alert("You already got a connection!");
         }
