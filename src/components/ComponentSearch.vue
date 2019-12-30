@@ -43,8 +43,9 @@ export default {
   },
   methods: {
     addComponent(componentItem) {
-      store.mutations.addActiveComponent(componentItem);
       alert("You've added the " + componentItem.name + " component!");
+      store.commit("addActiveComponent", componentItem);
+      alert("Successfully added that shit!");
     }
   }
 };

@@ -38,7 +38,8 @@ export default new Vuex.Store({
   },
   mutations: {
     addActiveComponent(state, value) {
-      state.activeComponents.add(value);
+      //state.activeComponents = value;
+      state.activeComponents.push(value);
     },
     removeActiveComponent(state, value) {
       state.activeComponents.remove(value);
