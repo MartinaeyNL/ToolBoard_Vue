@@ -17,8 +17,8 @@
         </v-list-item>
       </template>
 
-      <template v-slot:item="data" :aria-selected="addComponent()">
-        <template>
+      <template v-slot:item="data">
+        <v-list-item @click="addComponent(data.item.name)">
           <v-list-item-avatar>
             <img :src="data.item.picture" />
           </v-list-item-avatar>
@@ -27,7 +27,7 @@
               <span>{{ data.item.name }}</span>
             </v-list-item-title>
           </v-list-item-content>
-        </template>
+        </v-list-item>
       </template>
     </v-combobox>
   </div>
@@ -43,8 +43,8 @@ export default {
     };
   },
   methods: {
-    addComponent() {
-      alert("You've clicked on something!"); // [" + componentName + "]");
+    addComponent(componentName) {
+      alert("You've clicked on something! [" + componentName + "]");
     }
   }
 };
