@@ -1,21 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-//import ChatCard from "../components/ConnectionCards/ChatCard.vue";
-//import OBSStudioCard from "../components/ConnectionCards/OBSStudioCard.vue";
+import ChatCard from "../components/ConnectionCards/ChatCard.vue";
+import OBSStudioCard from "../components/ConnectionCards/OBSStudioCard.vue";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  /*data() {
-    const logos = {
-      1: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-      2: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-      3: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-      4: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-      5: "https://cdn.vuetifyjs.com/images/lists/5.jpg"
-    };
-  },*/
   state() {
     const logos = {
       1: "https://obsproject.com/assets/images/new_icon_small.png",
@@ -27,18 +18,31 @@ export default new Vuex.Store({
     return {
       availableComponents: ["OBS Statistics", "Streamer Chats"],
       detailedComponentList: [
-        { name: "OBS Statistics", group: "OBS Studio", picture: logos[1] },
+        {
+          name: "OBS Statistics",
+          group: "OBS Studio",
+          picture: logos[1],
+          card: OBSStudioCard
+        },
         {
           name: "Streamer Chats",
           group: "Unique / Specials",
-          picture: logos[2]
+          picture: logos[2],
+          card: ChatCard
         }
       ],
+      activeComponents: [],
       webSocketOBS: null,
       webSocketChat: null
     };
   },
   mutations: {
+    addActiveComponent(state, value) {
+      state.activeComponents.add(value);
+    },
+    removeActiveComponent(state, value) {
+      state.activeComponents.remove(value);
+    },
     setWebSocketOBS(state, value) {
       state.webSocketOBS = value;
     },
@@ -49,6 +53,7 @@ export default new Vuex.Store({
   getters: {
     availableComponents: state => state.availableComponents,
     detailedComponentList: state => state.detailedComponentList,
+    activeComponents: state => state.activeComponents,
     webSocketOBS: state => state.webSocketOBS,
     webSocketChat: state => state.webSocketChat
   },

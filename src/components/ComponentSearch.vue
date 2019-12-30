@@ -4,7 +4,6 @@
       style="width: 90%; margin-top: 26px;"
       :items="detailedComponentList"
       label="Add Component"
-      clearable="true"
       item-text="name"
       item-value="name"
     >
@@ -18,7 +17,7 @@
       </template>
 
       <template v-slot:item="data">
-        <v-list-item @click="addComponent(data.item.name)">
+        <v-list-item @click="addComponent(data.item)">
           <v-list-item-avatar>
             <img :src="data.item.picture" />
           </v-list-item-avatar>
@@ -43,8 +42,9 @@ export default {
     };
   },
   methods: {
-    addComponent(componentName) {
-      alert("You've clicked on something! [" + componentName + "]");
+    addComponent(componentItem) {
+      store.mutations.addActiveComponent(componentItem);
+      alert("You've added the " + componentItem.name + " component!");
     }
   }
 };
