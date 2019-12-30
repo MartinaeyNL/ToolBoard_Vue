@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(22, 36, 88, 0.8)">
+  <v-card color="rgb(22, 36, 88, 0.8)" height="260">
     <v-img
       src="https://obsproject.com/assets/images/new_icon_small.png"
       aspect-ratio="1"
@@ -37,12 +37,16 @@
           ></v-text-field>
         </v-flex>
         <v-flex xs12 sm12 md12 lg12 xl12>
-          <v-layout align-center>
+          <v-layout align-center style="margin-top: 8px;">
             <v-flex xs5 sm5 md5 lg5 xl5>
-              <v-btn color="green darken-3" @click="launchWebSocket">Connect</v-btn>
+              <v-btn
+                color="green darken-3"
+                @click="launchWebSocket()"
+                :disabled="isWebSocketActive()"
+              >Connect</v-btn>
             </v-flex>
             <v-flex xs7 sm7 md7 lg7 xl7>
-              <div>
+              <div v-if="isWebSocketActive()">
                 <v-icon color="grey">mdi-information</v-icon>
                 <v-label>You've already connected!</v-label>
               </div>
@@ -66,20 +70,26 @@ export default {
   methods: {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route == "") {
-        if (this.$store.getters.webSocketOBS == null) {
-          var socket = websocket.methods.launchWebSocket(
-            this.address,
-            this.port,
-            this.route,
-            this.$store,
-            "setWebSocketOBS"
-          );
-          this.$store.commit("setWebSocketOBS", socket);
-        } else {
-          alert("You already got a connection!");
-        }
+        var socket = websocket.methods.launchWebSocket(
+          this.address,
+          this.port,
+          this.route
+        );
+        alert("Test11111111");
+        this.$store.commit("setWebSocketOBS", socket);
+        alert("Test999999999999 woop");
+        alert("[" + this.$store.getters.webSocketOBSIsNull + "]");
       } else {
         alert("Invalid IP Address and/or Port!");
+      }
+    },
+    isWebSocketActive() {
+      var isNull = this.$store.getters.webSocketOBSIsNull;
+      //alert("Tijdens de check was de websocket [" + isNull + "]");
+      if (isNull == true) {
+        return false;
+      } else {
+        return true;
       }
     }
   }

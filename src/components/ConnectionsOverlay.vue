@@ -2,38 +2,29 @@
   <div style="padding: 0% 5% 0% 5%">
     <v-layout row wrap>
       <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
+        <div class="connectionCard">
           <OBSStudioCard />
         </div>
       </v-flex>
       <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
+        <div class="connectionCard">
           <TwitchCard />
         </div>
       </v-flex>
       <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
+        <div class="connectionCard">
           <OBSStudioCard />
-        </div>
-      </v-flex>
-      <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
-          <TwitchCard />
-        </div>
-      </v-flex>
-      <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
-          <OBSStudioCard />
-        </div>
-      </v-flex>
-      <v-flex xs12 sm12 md6 lg4 xl4>
-        <div style="padding: 4%">
-          <TwitchCard />
         </div>
       </v-flex>
     </v-layout>
   </div>
 </template>
+
+<style>
+.connectionCard {
+  padding: 4%;
+}
+</style>
 
 <script>
 //import websocket from "../logic/websocket.js";

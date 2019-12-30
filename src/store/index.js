@@ -55,9 +55,15 @@ export default new Vuex.Store({
     availableComponents: state => state.availableComponents,
     detailedComponentList: state => state.detailedComponentList,
     activeComponents: state => state.activeComponents,
-    webSocketOBSIsNull: state => state.webSocketOBS.isNull(),
-    webSocketChatIsNull: state => state.webSocketChat.isNull(),
-    webSocketChatIsClosed: state => state.webSocketChat.isClosed()
+    webSocketOBSIsNull: state => {
+      return state.webSocketOBS == null;
+    },
+    webSocketChatIsNull: state => {
+      return state.webSocketChat.isNull();
+    },
+    webSocketChatIsClosed: state => {
+      return state.webSocketChat.isClosed();
+    }
   },
   actions: {},
   modules: {}

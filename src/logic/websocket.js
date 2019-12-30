@@ -1,21 +1,21 @@
 import { isNullOrUndefined } from "util";
 
-function launchWebSocket(host, port, route, store, mutation) {
+function launchWebSocket(host, port, route) {
   // Check if browser supports websocket
-  var socket = null;
+  this.websocket = null;
   if ("WebSocket" in window) {
-    socket = new WebSocket("ws://" + host + ":" + port + route);
+    this.websocket = new WebSocket("ws://" + host + ":" + port + route);
     // When opening
-    socket.onopen = function() {
-      store.commit(mutation, socket);
+    this.websocket.onopen = function() {
+      //store.commit(mutation, socket);
       alert("The connection is ready!");
     };
     // When it receives a message
-    socket.onmessage = function(evt) {
+    this.websocket.onmessage = function(evt) {
       alert("Received the message: [" + evt.data + "]");
     };
-    socket.onclose = function() {
-      store.commit(mutation, null);
+    this.websocket.onclose = function() {
+      //store.commit(mutation, null);
       alert("Closed the connection :(");
     };
   } else {
@@ -24,10 +24,10 @@ function launchWebSocket(host, port, route, store, mutation) {
 
   // Making sure the connection closes on refresh.
   window.onbeforeunload = function() {
-    this.socket.close();
+    this.websocket.close();
   };
 
-  return socket;
+  return this.websocket;
 }
 
 /*--------------------------------------------------------------------*/
@@ -59,15 +59,18 @@ function isJSON(input) {
 }
 
 function isClosed() {
-  return this.socket.readyState == WebSocket.CLOSED;
+  return this.websocket.readyState == WebSocket.CLOSED;
 }
 
 function isNull() {
-  return this.socket == null;
+  return this.websocket == null;
 }
 
 export default {
   name: "websocket",
+  data: {
+    websocket: null
+  },
   methods: {
     launchWebSocket,
     sendMessage,

@@ -1,5 +1,5 @@
 <template>
-  <v-card color="rgb(100, 65, 164, 0.8)">
+  <v-card color="rgb(100, 65, 164, 0.8)" height="260">
     <v-img
       src="https://seeklogo.com/images/T/twitch-logo-4931D91F85-seeklogo.com.png"
       aspect-ratio="1"
@@ -9,20 +9,18 @@
     ></v-img>
     <v-card-title>Twitch</v-card-title>
     <v-card-subtitle>
-      <span
-        >Link your Twitch to get information<br />
-        such as your chat, amount of followers,<br />
-        viewer count and more.</span
-      >
+      <span>
+        Link your Twitch to get information
+        <br />such as your chat, amount of followers,
+        <br />viewer count and more.
+      </span>
     </v-card-subtitle>
     <v-card-actions>
       <v-layout wrap>
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
             <v-flex xs6 sm6 md6 lg6 xl6>
-              <v-btn color="green darken-3" @click="connectTwitch"
-                >Authenticate</v-btn
-              >
+              <v-btn color="green darken-3" @click="connectTwitch">Authenticate</v-btn>
             </v-flex>
             <v-flex xs6 sm6 md6 lg6 xl6>
               <div>
