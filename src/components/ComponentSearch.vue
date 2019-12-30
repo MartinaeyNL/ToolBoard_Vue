@@ -6,7 +6,6 @@
       :items="detailedComponentList"
       label="Add Component"
       clearable="true"
-      chips="true"
       item-text="name"
       item-value="name"
     >
