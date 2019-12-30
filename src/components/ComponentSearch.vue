@@ -33,18 +33,17 @@
 </template>
 
 <script>
-import store from "../store/index.js";
 export default {
   data() {
     return {
-      componentList: store.getters.availableComponents,
-      detailedComponentList: store.getters.detailedComponentList
+      componentList: this.$store.getters.availableComponents,
+      detailedComponentList: this.$store.getters.detailedComponentList
     };
   },
   methods: {
     addComponent(componentItem) {
       alert("You've added the " + componentItem.name + " component!");
-      store.commit("addActiveComponent", componentItem);
+      this.$store.commit("addActiveComponent", componentItem);
       alert("Successfully added that shit!");
     }
   }

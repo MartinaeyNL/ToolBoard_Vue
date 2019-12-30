@@ -12,7 +12,8 @@
       <span>
         Adds support for quality statistics,
         <br />starting and stopping the stream,
-        <br />switching scenes, and many more.
+        <br />switching scenes, and many
+        more.
       </span>
     </v-card-subtitle>
     <v-card-actions>

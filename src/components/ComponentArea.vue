@@ -18,11 +18,10 @@
 </template>
 
 <script>
-import store from "../store/index.js";
 export default {
   data() {
     return {
-      activeComponents: store.getters.activeComponents
+      activeComponents: this.$store.getters.activeComponents
     };
   }
 };

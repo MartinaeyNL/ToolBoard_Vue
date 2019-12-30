@@ -9,11 +9,11 @@
     ></v-img>
     <v-card-title>Streamer Rooms</v-card-title>
     <v-card-subtitle>
-      <span
-        >Special feature where you can chat<br />
-        and share information with other streamers<br />
-        such as settings and stats.</span
-      >
+      <span>
+        Special feature where you can chat
+        <br />and share information with other streamers
+        <br />such as settings and stats.
+      </span>
     </v-card-subtitle>
     <v-card-actions>
       <v-layout wrap>
@@ -29,8 +29,7 @@
                 color="green darken-3"
                 @click="launchWebSocket"
                 :disabled="!socketIsClosed || !socketIsNull"
-                >Connect</v-btn
-              >
+              >Connect</v-btn>
             </v-flex>
             <v-flex xs7 sm7 md7 lg7 xl7>
               <div>
@@ -56,14 +55,15 @@ export default {
   methods: {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route != "") {
-        if (this.$store.getters.webSocketChat == null) {
-          websocket.methods.launchWebSocket(
+        if (this.socketIsNull()) {
+          var socket = websocket.methods.launchWebSocket(
             this.address,
             this.port,
             this.route,
             this.$store,
             "setWebSocketChat"
           );
+          this.$store.commit("setWebSocketChat", socket);
         } else {
           alert("You already got a connection!");
         }
@@ -72,12 +72,12 @@ export default {
       }
     },
     socketIsClosed() {
-      var isClosed = websocket.methods.isClosed();
+      var isClosed = this.$store.getters.webSocketChatIsClosed;
       alert("The close state of the socket is [" + isClosed + "]");
       return isClosed;
     },
     socketIsNull() {
-      var isNull = websocket.methods.isNull();
+      var isNull = this.$store.getters.webSocketChatIsNull;
       alert("The close state of the socket is [" + isNull + "]");
       return isNull;
     }

@@ -9,7 +9,6 @@ function launchWebSocket(host, port, route, store, mutation) {
     socket.onopen = function() {
       store.commit(mutation, socket);
       alert("The connection is ready!");
-      //alert("[" + store.getters.webSocketOBS + "] & type = [" + mutation + "]");
     };
     // When it receives a message
     socket.onmessage = function(evt) {
@@ -18,7 +17,6 @@ function launchWebSocket(host, port, route, store, mutation) {
     socket.onclose = function() {
       store.commit(mutation, null);
       alert("Closed the connection :(");
-      //alert("[" + store.getters.webSocketOBS + "] & type = [" + mutation + "]");
     };
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
