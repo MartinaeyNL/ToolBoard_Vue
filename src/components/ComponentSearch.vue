@@ -1,15 +1,13 @@
 <template>
   <div>
-    <v-autocomplete
-      style="width: 90%; margin-top: 24px;"
-      v-model="componentList"
+    <v-combobox
+      style="width: 90%; margin-top: 26px;"
       :items="detailedComponentList"
       label="Add Component"
       clearable="true"
       item-text="name"
       item-value="name"
     >
-      <!--  When nothing is found a hint will be given:-->
       <template v-slot:no-data>
         <v-list-item>
           <v-list-item-title style="color: #999999">
@@ -19,8 +17,7 @@
         </v-list-item>
       </template>
 
-      <!-- When something is found... -->
-      <template v-slot:item="data">
+      <template v-slot:item="data" :aria-selected="addComponent()">
         <template>
           <v-list-item-avatar>
             <img :src="data.item.picture" />
@@ -31,8 +28,8 @@
             </v-list-item-title>
           </v-list-item-content>
         </template>
-      </template>-
-    </v-autocomplete>
+      </template>
+    </v-combobox>
   </div>
 </template>
 
@@ -45,16 +42,9 @@ export default {
       detailedComponentList: store.getters.detailedComponentList
     };
   },
-  watch: {
-    search() {
-      // Check if items are already loaded
-      if (this.availableItems.length > 0) {
-        return;
-      } else {
-        this.isLoading = true;
-        this.availableItems = store.getters.availableComponents;
-        this.isLoading = false;
-      }
+  methods: {
+    addComponent() {
+      alert("You've clicked on something!"); // [" + componentName + "]");
     }
   }
 };
