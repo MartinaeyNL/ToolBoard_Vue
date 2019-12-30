@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import ChatCard from "@/components/ConnectionCards/ChatCard.vue";
+import ChatCard from "../components/ComponentCards/Unique/ChatCard.vue";
 import OBSStudioCard from "@/components/ComponentCards/OBS_Studio/StatsCard.vue";
 
 Vue.use(Vuex);
@@ -33,36 +33,48 @@ export default new Vuex.Store({
       ],
       activeComponents: [],
       webSocketOBS: null,
-      webSocketChat: null
+      webSocketOBSError: null,
+      webSocketChat: null,
+      webSocketChatError: null
     };
   },
   mutations: {
+    // Component area
     addActiveComponent(state, value) {
-      //state.activeComponents = value;
       state.activeComponents.push(value);
     },
     removeActiveComponent(state, value) {
       state.activeComponents.remove(value);
     },
+    // WebSocket setters
     setWebSocketOBS(state, value) {
       state.webSocketOBS = value;
     },
+    setWebSocketOBSError(state, value) {
+      state.webSocketOBSError = value;
+    },
     setWebSocketChat(state, value) {
       state.webSocketChat = value;
+    },
+    setWebSocketChatError(state, value) {
+      state.webSocketChatError = value;
     }
   },
   getters: {
     availableComponents: state => state.availableComponents,
     detailedComponentList: state => state.detailedComponentList,
     activeComponents: state => state.activeComponents,
-    webSocketOBSIsNull: state => {
+    webSocketOBS_IsNull: state => {
       return state.webSocketOBS == null;
     },
-    webSocketChatIsNull: state => {
-      return state.webSocketChat.isNull();
+    webSocketOBS_CheckError: state => {
+      return state.webSocketOBSError;
     },
-    webSocketChatIsClosed: state => {
-      return state.webSocketChat.isClosed();
+    webSocketChat_IsNull: state => {
+      return state.webSocketChat == null;
+    },
+    webSocketChat_CheckError: state => {
+      return state.webSocketChatError;
     }
   },
   actions: {},

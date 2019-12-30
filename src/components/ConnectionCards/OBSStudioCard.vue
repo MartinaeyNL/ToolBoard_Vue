@@ -71,22 +71,24 @@ export default {
   }),
   methods: {
     launchWebSocket() {
-      if (this.address != "" && this.port != "" && this.route == "") {
+      if (this.checkCredentials()) {
         var socket = websocket.methods.launchWebSocket(
           this.address,
           this.port,
-          this.route
+          this.route,
+          this.$store,
+          "setWebSocketOBSError"
         );
         alert("Test11111111");
         this.$store.commit("setWebSocketOBS", socket);
         alert("Test999999999999 woop");
-        alert("[" + this.$store.getters.webSocketOBSIsNull + "]");
+        alert("[" + this.$store.getters.webSocketOBS_IsNull + "]");
       } else {
         alert("Invalid IP Address and/or Port!");
       }
     },
     isWebSocketActive() {
-      var isNull = this.$store.getters.webSocketOBSIsNull;
+      var isNull = this.$store.getters.webSocketOBS_IsNull;
       //alert("Tijdens de check was de websocket [" + isNull + "]");
       if (isNull == true) {
         return false;

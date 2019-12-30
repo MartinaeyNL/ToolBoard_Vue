@@ -1,22 +1,22 @@
 import { isNullOrUndefined } from "util";
 
-function launchWebSocket(host, port, route) {
+function launchWebSocket(host, port, route, store, errorHandler) {
   // Check if browser supports websocket
   this.websocket = null;
   if ("WebSocket" in window) {
     this.websocket = new WebSocket("ws://" + host + ":" + port + route);
     // When opening
     this.websocket.onopen = function() {
-      //store.commit(mutation, socket);
       alert("The connection is ready!");
     };
     // When it receives a message
     this.websocket.onmessage = function(evt) {
       alert("Received the message: [" + evt.data + "]");
     };
-    this.websocket.onclose = function() {
-      //store.commit(mutation, null);
-      alert("Closed the connection :(");
+    this.websocket.onclose = function(evt) {
+      alert("Closed the connection..");
+      store.commit(errorHandler, evt);
+      alert("Error code: [#" + evt.code + "]");
     };
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
