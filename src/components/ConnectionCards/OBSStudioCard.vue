@@ -46,9 +46,11 @@
               >Connect</v-btn>
             </v-flex>
             <v-flex xs7 sm7 md7 lg7 xl7>
-              <div v-if="isWebSocketActive()">
+              <div>
                 <v-icon color="grey">mdi-information</v-icon>
-                <v-label>You've already connected!</v-label>
+                <v-label v-if="isWebSocketActive()">You've already connected!</v-label>
+                <v-label v-else-if="checkCredentials()">Everything is ready!</v-label>
+                <v-label v-else>The credentials are incorrect.</v-label>
               </div>
             </v-flex>
           </v-layout>
@@ -91,6 +93,12 @@ export default {
       } else {
         return true;
       }
+    },
+    checkCredentials() {
+      if (this.address != "" && this.port != "" && this.route == "") {
+        return true;
+      }
+      return false;
     }
   }
 };

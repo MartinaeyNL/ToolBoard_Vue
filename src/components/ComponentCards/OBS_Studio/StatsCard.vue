@@ -1,5 +1,5 @@
 <template>
-  <div v-if="websocketIsNull">Please connect your OBS Studio.</div>
+  <div v-if="websocketIsNull()">Please connect your OBS Studio.</div>
   <div v-else>Wooohoooo it worked!</div>
 </template>
 
