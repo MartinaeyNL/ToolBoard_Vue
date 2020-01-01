@@ -9,6 +9,9 @@
     <h3>List of Chat Lobbies</h3>
     <v-card v-for="lobby in this.chatLobbies" :key="lobby.displayname">
       <span>{{ lobby.displayname }}</span>
+      <v-card-actions>
+        <v-btn @click="joinChatLobby(lobby.displayname)">Join!</v-btn>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -64,6 +67,9 @@ export default {
       }
       //alert("[" + data.messageType + "]");
       //alert("[" + data.object + "]");
+    },
+    joinChatLobby(name) {
+      alert(name); // Temporary
     }
   }
 };
