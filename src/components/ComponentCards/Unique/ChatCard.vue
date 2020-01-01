@@ -33,7 +33,7 @@ export default {
     this.websocketCon.onmessage = evt => {
       // eslint-disable-next-line no-console
       console.log(evt);
-      this.handleMessage(evt);
+      this.handleMessage(evt.data);
     };
     this.$store.commit("setWebSocketChat", this.websocketCon);
   },
@@ -56,12 +56,14 @@ export default {
       }
       return false;
     },
-    handleMessage(evt) {
-      var result = JSON.parse(evt.data);
-      //switch(result.messageType) {
-      //  case
-      //}
-      alert(result);
+    handleMessage(data) {
+      var result = JSON.parse(data);
+      switch (result.messageType) {
+        case "chatLobbyList":
+          this.chatLobbies = result.object;
+      }
+      //alert("[" + data.messageType + "]");
+      //alert("[" + data.object + "]");
     }
   }
 };
