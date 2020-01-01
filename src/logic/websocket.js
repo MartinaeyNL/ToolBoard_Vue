@@ -6,13 +6,13 @@ function launchWebSocket(host, port, route, store, errorHandler) {
   if ("WebSocket" in window) {
     this.websocket = new WebSocket("ws://" + host + ":" + port + route);
     // When opening
-    this.websocket.onopen = function() {
-      alert("The connection is ready!");
-    };
+    //this.websocket.onopen = function() {
+    //  alert("The connection is ready!");
+    //};
     // When it receives a message
-    this.websocket.onmessage = function(evt) {
-      alert("Received the message: [" + evt.data + "]");
-    };
+    //this.websocket.onmessage = function(evt) {
+    //  alert("Received the message: [" + evt.data + "]");
+    //};
     this.websocket.onclose = function(evt) {
       alert("Closed the connection..");
       store.commit(errorHandler, evt);

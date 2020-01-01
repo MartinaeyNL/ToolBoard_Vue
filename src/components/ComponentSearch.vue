@@ -42,9 +42,9 @@ export default {
   },
   methods: {
     addComponent(componentItem) {
-      alert("You've added the " + componentItem.name + " component!");
+      //alert("You've added the " + componentItem.name + " component!");
       this.$store.commit("addActiveComponent", componentItem);
-      alert("Successfully added that shit!");
+      //alert("Successfully added that shit!");
     }
   }
 };
