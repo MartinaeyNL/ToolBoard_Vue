@@ -78,5 +78,22 @@ export default new Vuex.Store({
     }
   },
   actions: {},
-  modules: {}
+  modules: {
+    chatLobbies: {
+      state() {
+        return {
+          chatLobbies: []
+        };
+      },
+      mutations: {
+        addChatLobby(state, value) {
+          state.chatLobbies.push(value);
+        },
+        removeChatLobby(state, value) {
+          state.chatLobbies.remove(value);
+        }
+      },
+      getters: {}
+    }
+  }
 });

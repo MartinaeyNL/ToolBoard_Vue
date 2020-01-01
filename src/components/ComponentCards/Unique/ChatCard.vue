@@ -3,7 +3,7 @@
     <span>Connection closed with code [#{{ this.websocketError.code }}]</span>
   </div>
   <div v-else-if="this.websocketIsNull() == true">Connecting to the server..</div>
-  <div v-else>Welcome to the chat rooms!</div>
+  <div v-else></div>
 </template>
 
 <script>
