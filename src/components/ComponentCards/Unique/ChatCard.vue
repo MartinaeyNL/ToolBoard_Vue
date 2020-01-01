@@ -2,9 +2,7 @@
   <div v-if="this.websocketErrorCheck() != null">
     <span>Connection closed with code [#{{ this.websocketError.code }}]</span>
   </div>
-  <div v-else-if="this.websocketIsNull() == true">
-    Connecting to the server..
-  </div>
+  <div v-else-if="this.websocketIsNull() == true">Connecting to the server..</div>
   <div v-else>
     <h3>List of Chat Lobbies</h3>
     <v-card v-for="lobby in this.chatLobbies" :key="lobby.displayname">
@@ -27,17 +25,25 @@ export default {
   }),
   created: function() {
     this.websocketCon = websocket.methods.launchWebSocket(
-      "localhost",
-      8096,
-      "/streamerchat/",
-      this.$store,
-      "setWebSocketChatError"
+      "localhost", // Url
+      8096, // Port
+      "/streamerchat/", // Route
+      this.$store, // Store
+      "setWebSocketChatError", // ErrorHandler
+      null, // OnOpen
+      evt => {
+        // OnMessage
+        // eslint-disable-next-line no-console
+        console.log(evt);
+        this.handleMessage(evt.data);
+      },
+      null // OnClose
     );
-    this.websocketCon.onmessage = evt => {
-      // eslint-disable-next-line no-console
-      console.log(evt);
-      this.handleMessage(evt.data);
-    };
+    //this.websocketCon.onmessage = evt => {
+    //  // eslint-disable-next-line no-console
+    //  console.log(evt);
+    //  this.handleMessage(evt.data);
+    //};
     this.$store.commit("setWebSocketChat", this.websocketCon);
   },
   methods: {
@@ -69,6 +75,7 @@ export default {
       //alert("[" + data.object + "]");
     },
     joinChatLobby(name) {
+      websocket.sendMessage(this.websocketCon, name);
       alert(name); // Temporary
     }
   }

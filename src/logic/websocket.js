@@ -1,23 +1,48 @@
 import { isNullOrUndefined } from "util";
 
-function launchWebSocket(host, port, route, store, errorHandler) {
+function launchWebSocket(
+  host,
+  port,
+  route,
+  store,
+  errorHandler,
+  onopen,
+  onmessage,
+  onclose
+) {
   // Check if browser supports websocket
   this.websocket = null;
   if ("WebSocket" in window) {
     this.websocket = new WebSocket("ws://" + host + ":" + port + route);
+
     // When opening
-    this.websocket.onopen = function() {
-      alert("The connection is ready!");
-    };
+    if (onopen == null) {
+      this.websocket.onopen = function() {
+        alert("The connection is ready!");
+      };
+    } else {
+      this.websocket.onopen = onopen;
+    }
+
     // When it receives a message
-    this.websocket.onmessage = function(evt) {
-      alert("Received the message: [" + evt.data + "]");
-    };
-    this.websocket.onclose = function(evt) {
-      alert("Closed the connection..");
-      store.commit(errorHandler, evt);
-      alert("Error code: [#" + evt.code + "]");
-    };
+    if (onmessage == null) {
+      this.websocket.onmessage = function(evt) {
+        alert("Received the message: [" + evt.data + "]");
+      };
+    } else {
+      this.websocket.onmessage = onmessage;
+    }
+
+    // When the connection closes
+    if (onclose == null) {
+      this.websocket.onclose = function(evt) {
+        alert("Closed the connection..");
+        store.commit(errorHandler, evt);
+        alert("Error code: [#" + evt.code + "]");
+      };
+    } else {
+      this.websocket.onclose = onclose;
+    }
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
   }
@@ -27,7 +52,7 @@ function launchWebSocket(host, port, route, store, errorHandler) {
     this.websocket.close();
   };
 
-  return this.websocket;
+  return this;
 }
 
 /*--------------------------------------------------------------------*/
