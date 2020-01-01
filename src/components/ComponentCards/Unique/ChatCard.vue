@@ -75,8 +75,14 @@ export default {
       //alert("[" + data.object + "]");
     },
     joinChatLobby(name) {
-      websocket.sendMessage(this.websocketCon, name);
-      alert(name); // Temporary
+      alert("Joining " + name + "..");
+      var wsMessage = {
+        messageType: "joinChatLobby",
+        object: name
+      };
+      //alert("Sending message..");
+      websocket.methods.sendMessage(this.websocketCon, wsMessage);
+      alert("Done!");
     }
   }
 };

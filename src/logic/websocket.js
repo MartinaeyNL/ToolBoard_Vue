@@ -11,37 +11,37 @@ function launchWebSocket(
   onclose
 ) {
   // Check if browser supports websocket
-  this.websocket = null;
+  var socket = null;
   if ("WebSocket" in window) {
-    this.websocket = new WebSocket("ws://" + host + ":" + port + route);
+    socket = new WebSocket("ws://" + host + ":" + port + route);
 
     // When opening
     if (onopen == null) {
-      this.websocket.onopen = function() {
+      socket.onopen = function() {
         alert("The connection is ready!");
       };
     } else {
-      this.websocket.onopen = onopen;
+      socket.onopen = onopen;
     }
 
     // When it receives a message
     if (onmessage == null) {
-      this.websocket.onmessage = function(evt) {
+      socket.onmessage = function(evt) {
         alert("Received the message: [" + evt.data + "]");
       };
     } else {
-      this.websocket.onmessage = onmessage;
+      socket.onmessage = onmessage;
     }
 
     // When the connection closes
     if (onclose == null) {
-      this.websocket.onclose = function(evt) {
+      socket.onclose = function(evt) {
         alert("Closed the connection..");
         store.commit(errorHandler, evt);
         alert("Error code: [#" + evt.code + "]");
       };
     } else {
-      this.websocket.onclose = onclose;
+      socket.onclose = onclose;
     }
   } else {
     alert("Your browser doesn't support WebSockets. Lol.");
@@ -49,19 +49,24 @@ function launchWebSocket(
 
   // Making sure the connection closes on refresh.
   window.onbeforeunload = function() {
-    this.websocket.close();
+    socket.close();
   };
 
-  return this;
+  return socket;
 }
 
 /*--------------------------------------------------------------------*/
 
 function sendMessage(socket, message) {
+  alert("Okay, so you want to send a message. Cool. Socket = [" + socket + "]");
   if (socket != null) {
+    alert("Step 1.");
     var finalMessage = JSON.stringify(message);
+    alert("Step 2.");
     if (!isNullOrUndefined(finalMessage)) {
-      socket.send(message);
+      // eslint-disable-next-line no-console
+      console.log(socket);
+      socket.send("Lalalalalalalalal Claudia de Breij");
       alert("I've sent the message");
     } else {
       alert("The input was not correct!");
@@ -71,36 +76,10 @@ function sendMessage(socket, message) {
   }
 }
 
-function isJSON(input) {
-  if (typeof text !== "string") {
-    return false;
-  }
-  try {
-    JSON.parse(input);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function isClosed() {
-  return this.websocket.readyState == WebSocket.CLOSED;
-}
-
-function isNull() {
-  return this.websocket == null;
-}
-
 export default {
   name: "websocket",
-  data: {
-    websocket: null
-  },
   methods: {
     launchWebSocket,
-    sendMessage,
-    isJSON,
-    isClosed,
-    isNull
+    sendMessage
   }
 };
