@@ -66,7 +66,7 @@ function sendMessage(socket, message) {
     if (!isNullOrUndefined(finalMessage)) {
       // eslint-disable-next-line no-console
       console.log(socket);
-      socket.send("Lalalalalalalalal Claudia de Breij");
+      socket.send(finalMessage);
       alert("I've sent the message");
     } else {
       alert("The input was not correct!");
