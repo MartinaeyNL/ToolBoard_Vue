@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import websocket from "../../logic/websocket.js";
+import websocket_api from "../../logic/websocket_api.js";
 export default {
   data: () => ({
     address: "localhost",
@@ -56,7 +56,7 @@ export default {
     launchWebSocket() {
       if (this.address != "" && this.port != "" && this.route != "") {
         if (this.socketIsNull()) {
-          var socket = websocket.methods.launchWebSocket(
+          var socket = websocket_api.methods.launchWebSocket(
             this.address,
             this.port,
             this.route,

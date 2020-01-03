@@ -77,7 +77,7 @@ function sendMessage(socket, message) {
 }
 
 export default {
-  name: "websocket",
+  name: "websocket_api",
   methods: {
     launchWebSocket,
     sendMessage

@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import websocket from "../logic/websocket.js";
+import websocket_api from "../logic/websocket_api.js";
 export default {
   methods: {
     launchWebSocket() {
-      websocket.methods.launchWebSocket();
+      websocket_api.methods.launchWebSocket();
     },
     sendMessage() {
-      websocket.methods.sendMessage(this.txtInput);
+      websocket_api.methods.sendMessage(this.txtInput);
     }
   }
 };

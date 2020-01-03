@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import websocket from "../../logic/websocket.js";
+import websocket_api from "../../logic/websocket_api.js";
 export default {
   data: () => ({
     address: "localhost",
@@ -72,7 +72,7 @@ export default {
   methods: {
     launchWebSocket() {
       if (this.checkCredentials()) {
-        var socket = websocket.methods.launchWebSocket(
+        var socket = websocket_api.methods.launchWebSocket(
           this.address,
           this.port,
           this.route,
@@ -89,7 +89,7 @@ export default {
     },
     isWebSocketActive() {
       var isNull = this.$store.getters.webSocketOBS_IsNull;
-      //alert("Tijdens de check was de websocket [" + isNull + "]");
+      //alert("Tijdens de check was de websocket_api [" + isNull + "]");
       if (isNull == true) {
         return false;
       } else {

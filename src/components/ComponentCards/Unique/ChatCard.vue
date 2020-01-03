@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import websocket from "@/logic/websocket.js";
+import websocket_api from "@/logic/websocket_api.js";
 
 export default {
   data: () => ({
@@ -24,7 +24,7 @@ export default {
     chatLobbies: []
   }),
   created: function() {
-    this.websocketCon = websocket.methods.launchWebSocket(
+    this.websocketCon = websocket_api.methods.launchWebSocket(
       "localhost", // Url
       8096, // Port
       "/streamerchat/", // Route
@@ -81,7 +81,7 @@ export default {
         object: name
       };
       //alert("Sending message..");
-      websocket.methods.sendMessage(this.websocketCon, wsMessage);
+      websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
       alert("Done!");
     }
   }
