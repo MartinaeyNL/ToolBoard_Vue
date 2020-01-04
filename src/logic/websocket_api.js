@@ -58,14 +58,13 @@ function launchWebSocket(
 /*--------------------------------------------------------------------*/
 
 function sendMessage(socket, message) {
-  alert("Okay, so you want to send a message. Cool. Socket = [" + socket + "]");
+  //alert("Okay, so you want to send a message. Cool. Socket = [" + socket + "]");
   if (socket != null) {
-    alert("Step 1.");
+    //alert("Step 1.");
     var finalMessage = JSON.stringify(message);
-    alert("Step 2.");
+    //alert("Step 2.");
     if (!isNullOrUndefined(finalMessage)) {
       // eslint-disable-next-line no-console
-      console.log(socket);
       socket.send(finalMessage);
       alert("I've sent the message");
     } else {
