@@ -11,11 +11,9 @@
         <v-flex xs12 sm9 md7 lg5 xl4>
           <v-layout row wrap align-center>
             <v-flex xs12 sm6 md6 lg6 xl6>
-              <v-autocomplete
-                style="width: 90%; margin-top: 24px;"
-                :items="items"
-                label="Add Component"
-              ></v-autocomplete>
+              <div>
+                <ComponentSearch />
+              </div>
             </v-flex>
             <v-flex xs6 sm3 md3 lg3 xl3>
               <v-btn
@@ -29,11 +27,7 @@
               </v-btn>
             </v-flex>
             <v-flex xs6 sm3 md3 lg3 xl3>
-              <v-btn
-                color="blue darken-3"
-                class="elevation-0"
-                style="overflow: hidden;"
-              >
+              <v-btn color="blue darken-3" style="overflow: hidden;">
                 <v-icon style="margin-right: 2px;">mdi-settings</v-icon>
                 <span style="margin-left: 2px;">Settings</span>
               </v-btn>
@@ -46,13 +40,11 @@
       <ConnectionsOverlay />
       <v-layout row wrap>
         <v-flex class="text-xs-center">
-          <v-btn @click="connectionsOverlay = false" style="margin-top: 50px;"
-            >Close</v-btn
-          >
+          <v-btn @click="connectionsOverlay = false">Close</v-btn>
         </v-flex>
       </v-layout>
     </v-overlay>
-    <v-content style="margin-top: 200px;"></v-content>
+    <v-content style="margin-bottom: 200px;"></v-content>
   </v-app>
 </template>
 
@@ -65,9 +57,10 @@
 <script>
 import Home from "../src/views/Home.vue";
 import ConnectionsOverlay from "../src/components/ConnectionsOverlay.vue";
+import ComponentSearch from "../src/components/ComponentSearch.vue";
 export default {
   name: "App",
-  components: { Home, ConnectionsOverlay },
+  components: { Home, ConnectionsOverlay, ComponentSearch },
   data: () => ({
     connectionsOverlay: false
   })
