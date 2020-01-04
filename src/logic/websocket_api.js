@@ -66,9 +66,9 @@ function sendMessage(socket, message) {
     if (!isNullOrUndefined(finalMessage)) {
       // eslint-disable-next-line no-console
       socket.send(finalMessage);
-      alert("I've sent the message");
+      //alert("I've sent the message");
     } else {
-      alert("The input was not correct!");
+      alert("The websocket-message input was not correct!");
     }
   } else {
     alert("There is no websocket...");

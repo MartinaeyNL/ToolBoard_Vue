@@ -74,11 +74,9 @@ export default {
     },
     websocketIsReady() {
       if (this.websocketCon != null) {
-        //alert("State = [" + this.websocketCon.readyState + "]");
         if (this.websocketCon.readyState == 1) {
           return true;
         }
-        return false;
       }
       return false;
     },
@@ -86,15 +84,12 @@ export default {
       var result = JSON.parse(data);
       switch (result.messageType) {
         case "error":
-          alert(result.object.message);
+          alert(result.object + " ");
           break;
         case "getAllChatLobbies":
-          //this.$set(this.$data, this.chatLobbies, result.object);
-          //this.$set(this.chatLobbies, result.object);
           this.chatLobbies = result.object;
           break;
       }
-      this.rerenderUserList();
       //alert("[" + data.messageType + "]");
       //alert("[" + data.object + "]");
     },
