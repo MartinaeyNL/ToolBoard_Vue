@@ -1,15 +1,6 @@
 import { isNullOrUndefined } from "util";
 
-function launchWebSocket(
-  host,
-  port,
-  route,
-  store,
-  errorHandler,
-  onopen,
-  onmessage,
-  onclose
-) {
+function launchWebSocket(host, port, route, onopen, onmessage, onclose) {
   // Check if browser supports websocket
   var socket = null;
   if ("WebSocket" in window) {
@@ -36,9 +27,7 @@ function launchWebSocket(
     // When the connection closes
     if (onclose == null) {
       socket.onclose = function(evt) {
-        alert("Closed the connection..");
-        store.commit(errorHandler, evt);
-        alert("Error code: [#" + evt.code + "]");
+        alert("Closed the connection due to error with code #" + evt.code);
       };
     } else {
       socket.onclose = onclose;
