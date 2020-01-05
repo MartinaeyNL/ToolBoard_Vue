@@ -17,6 +17,7 @@
         <span>{{ lobby.displayname }}</span>
         <v-card-actions>
           <v-btn @click="joinChatLobby(lobby.displayname)">Join!</v-btn>
+          <v-btn @click="leaveChatLobby(lobby.displayname)">Leave!</v-btn>
         </v-card-actions>
         <v-layout v-for="user in lobby.users" :key="user.sessionId">
           <v-flex xl6 lg6 md6 sm6 xs6>
@@ -97,8 +98,17 @@ export default {
       alert("Joining " + name + "..");
       var wsMessage = {
         messageType: "joinChatLobby",
-        object: name,
-        controller: "ChatLobbyController"
+        object: name
+      };
+      //alert("Sending message..");
+      websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
+      this.refreshLobbyList();
+    },
+    leaveChatLobby(name) {
+      alert("Leave " + name + "..");
+      var wsMessage = {
+        messageType: "leaveChatLobby",
+        object: name
       };
       //alert("Sending message..");
       websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
@@ -107,8 +117,7 @@ export default {
     refreshLobbyList() {
       var wsMessage = {
         messageType: "getAllChatLobbies",
-        object: null,
-        controller: "ChatLobbyController"
+        object: null
       };
       websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
     }
