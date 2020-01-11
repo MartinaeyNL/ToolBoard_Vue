@@ -11,8 +11,8 @@
     <v-card-subtitle>
       <span>
         Link your Twitch to get information
-        <br />such as your chat, amount of followers,
-        <br />viewer count and more.
+        <br />such as your chat, amount of followers, <br />viewer count and
+        more.
       </span>
     </v-card-subtitle>
     <v-card-actions>
@@ -20,7 +20,9 @@
         <v-flex xs12 sm12 md12 lg12 xl12>
           <v-layout align-center>
             <v-flex xs6 sm6 md6 lg6 xl6>
-              <v-btn color="green darken-3" @click="connectTwitch">Authenticate</v-btn>
+              <v-btn color="green darken-3" @click="connectTwitch()"
+                >Authenticate</v-btn
+              >
             </v-flex>
             <v-flex xs6 sm6 md6 lg6 xl6>
               <div>
@@ -46,7 +48,9 @@ export default {
     connectTwitch() {
       //auth.methods.connectToTwitch();
       window.location.href =
-        "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=8si6r316a04nzt21ec0swvbfgdbjd2&redirect_uri=http://localhost:8081/auth&scope=chat:read";
+        "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=8si6r316a04nzt21ec0swvbfgdbjd2&redirect_uri=http://localhost:8081/auth#scope=chat:read";
+      // WORKS (OLD):       "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=8si6r316a04nzt21ec0swvbfgdbjd2&redirect_uri=http://localhost:8081/auth";
+      // WORKS (OLD API):   "https://api.twitch.tv/kraken/oauth2/authorize?client_id=8si6r316a04nzt21ec0swvbfgdbjd2&redirect_uri=http://localhost:8081/auth&response_type=code&scope=";
     }
   }
 };

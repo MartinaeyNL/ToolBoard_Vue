@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <Home />
     <v-app-bar app color="primary" dark>
       <v-layout row wrap align-center>
         <v-flex xs12 sm3 md5 lg7 xl8>
@@ -44,7 +43,7 @@
         </v-flex>
       </v-layout>
     </v-overlay>
-    <v-content style="margin-bottom: 200px;"></v-content>
+    <router-view style="margin-bottom: 200px;"></router-view>
   </v-app>
 </template>
 
@@ -55,12 +54,11 @@
 </style>
 
 <script>
-import Home from "../src/views/Home.vue";
 import ConnectionsOverlay from "../src/components/ConnectionsOverlay.vue";
 import ComponentSearch from "../src/components/ComponentSearch.vue";
 export default {
   name: "App",
-  components: { Home, ConnectionsOverlay, ComponentSearch },
+  components: { ConnectionsOverlay, ComponentSearch },
   data: () => ({
     connectionsOverlay: false
   })

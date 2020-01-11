@@ -9,7 +9,9 @@
         <h3>List of Chat Lobbies</h3>
       </v-flex>
       <v-flex xl1 lg1 md1 sm2 xs2>
-        <v-icon style="height: 16; width: 16;" @click="refreshLobbyList()">mdi-reload</v-icon>
+        <v-icon style="height: 16; width: 16;" @click="refreshLobbyList()"
+          >mdi-reload</v-icon
+        >
       </v-flex>
     </v-layout>
     <div v-if="this.chatLobbies.length > 0">
@@ -84,13 +86,6 @@ export default {
           alert(result.object + " ");
           break;
         case "getAllChatLobbies":
-          alert(
-            "Received object: [" +
-              result.object +
-              "] for #" +
-              result.receiver_SessionId +
-              "]"
-          );
           this.chatLobbies = result.object;
           //this.rerenderUserList();
           break;

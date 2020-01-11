@@ -18,10 +18,15 @@ const routes = [
     path: "/auth",
     name: "auth",
     component: () => import("../views/Auth.vue")
+    //props: route => ({
+    //  access_token: route.query.access_token
+    //code: "Lalalalalalalalalalalala"
+    //})
   }
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes
 });
 
