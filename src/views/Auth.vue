@@ -1,7 +1,12 @@
 <template>
-  <div>
-    <h1>LALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALALA</h1>
-    <h2>Code = [{{ this.parsedParams.access_token }}]</h2>
+  <div style="margin: 5%;">
+    <div v-if="websocketError != null">
+      <h1>Something went wrong!</h1>
+      <h3>Closed the connection with code #{{this.websocketError.code}}</h3>
+    </div>
+    <div v-else>
+      <h1>Authenticating...</h1>
+    </div>
   </div>
 </template>
 
@@ -12,7 +17,9 @@ export default {
   data: () => ({
     parsedParams: {},
     websocketError: null,
-    websocketCon: null
+    websocketCon: null,
+    displayname: null,
+    twitchUserId: null
   }),
   created: function() {
     // Split data from the URL
@@ -33,23 +40,25 @@ export default {
           }
         })
         .then(response => {
-          // eslint-disable-next-line no-console
-          console.log(response.data.data[0]);
+          // Setting the variables to the data received from GET request
+          this.displayname = response.data.data[0].display_name;
+          this.twitchUserId = response.data.data[0].id;
+
+          // Creating Websocket
           this.websocketCon = websocket_api.methods.launchWebSocket(
             "localhost", // Url
             8096, // Port
             "/auth/", // Route
-            evt => {
-              // eslint-disable-next-line no-console
-              console.log(evt);
+            () => {
+              // OnOpen()
               this.authenticate();
             },
             evt => {
-              // eslint-disable-next-line no-console
-              console.log(evt);
+              // OnMessage()
               this.handleMessage(evt.data);
             },
             evt => {
+              // OnClose()
               this.websocketError = evt;
             }
           );
@@ -64,10 +73,25 @@ export default {
     }
   },
   methods: {
+    handleMessage(data) {
+      var result = JSON.parse(data);
+      switch (result.messageType) {
+        case "error":
+          alert(result.object + " ");
+          break;
+        case "authenticate":
+          this.websocketCon.close();
+          this.$router.push("home");
+          break;
+      }
+    },
     authenticate() {
       var wsMessage = {
         messageType: "authenticate",
-        object: this.parsedParams.access_token
+        object: JSON.stringify({
+          displayname: this.displayname,
+          twitchUserId: this.twitchUserId
+        })
       };
       //alert("Sending message..");
       websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
