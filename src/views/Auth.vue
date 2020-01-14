@@ -2,7 +2,7 @@
   <div style="margin: 5%;">
     <div v-if="websocketError != null">
       <h1>Something went wrong!</h1>
-      <h3>Closed the connection with code #{{this.websocketError.code}}</h3>
+      <h3>Closed the connection with code #{{ this.websocketError.code }}</h3>
     </div>
     <div v-else>
       <h1>Authenticating...</h1>
@@ -76,10 +76,10 @@ export default {
     handleMessage(data) {
       var result = JSON.parse(data);
       switch (result.messageType) {
-        case "error":
+        case "ERROR":
           alert(result.object + " ");
           break;
-        case "authenticate":
+        case "AUTHENTICATE":
           this.websocketCon.close();
           this.$router.push("home");
           break;
@@ -87,7 +87,7 @@ export default {
     },
     authenticate() {
       var wsMessage = {
-        messageType: "authenticate",
+        messageType: "AUTHENTICATE",
         object: JSON.stringify({
           displayname: this.displayname,
           twitchUserId: this.twitchUserId

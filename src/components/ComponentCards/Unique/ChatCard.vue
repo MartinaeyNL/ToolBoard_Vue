@@ -9,19 +9,21 @@
         <h3>List of Chat Lobbies</h3>
       </v-flex>
       <v-flex xl1 lg1 md1 sm2 xs2>
-        <v-icon style="height: 16; width: 16;" @click="refreshLobbyList()">mdi-reload</v-icon>
+        <v-icon style="height: 16; width: 16;" @click="refreshLobbyList()"
+          >mdi-reload</v-icon
+        >
       </v-flex>
     </v-layout>
     <div v-if="this.chatLobbies.length > 0">
-      <v-card v-for="lobby in this.chatLobbies" :key="lobby.users">
-        <span>{{ lobby.displayname }}</span>
+      <v-card v-for="lobby in this.chatLobbies" :key="lobby.sessions">
+        <span>{{ lobby.displayName }}</span>
         <v-card-actions>
-          <v-btn @click="joinChatLobby(lobby.displayname)">Join!</v-btn>
-          <v-btn @click="leaveChatLobby(lobby.displayname)">Leave!</v-btn>
+          <v-btn @click="joinChatLobby(lobby.displayName)">Join!</v-btn>
+          <v-btn @click="leaveChatLobby(lobby.displayName)">Leave!</v-btn>
         </v-card-actions>
-        <v-layout v-for="user in lobby.users" :key="user.sessionId">
+        <v-layout v-for="session in lobby.sessions" :key="session.sessionId">
           <v-flex xl6 lg6 md6 sm6 xs6>
-            <span>{{ user.sessionId }}</span>
+            <span>{{ session.sessionId }}</span>
           </v-flex>
         </v-layout>
       </v-card>
@@ -80,10 +82,10 @@ export default {
     handleMessage(data) {
       var result = JSON.parse(data);
       switch (result.messageType) {
-        case "error":
+        case "ERROR":
           alert(result.object + " ");
           break;
-        case "getAllChatLobbies":
+        case "GET_ALL_CHAT_LOBBIES":
           this.chatLobbies = result.object;
           //this.rerenderUserList();
           break;
@@ -94,7 +96,7 @@ export default {
     joinChatLobby(name) {
       alert("Joining " + name + "..");
       var wsMessage = {
-        messageType: "joinChatLobby",
+        messageType: "JOIN_CHAT_LOBBY",
         object: name
       };
       //alert("Sending message..");
@@ -103,7 +105,7 @@ export default {
     leaveChatLobby(name) {
       alert("Leave " + name + "..");
       var wsMessage = {
-        messageType: "leaveChatLobby",
+        messageType: "LEAVE_CHAT_LOBBY",
         object: name
       };
       //alert("Sending message..");
@@ -111,7 +113,7 @@ export default {
     },
     refreshLobbyList() {
       var wsMessage = {
-        messageType: "getAllChatLobbies",
+        messageType: "GET_ALL_CHAT_LOBBIES",
         object: null
       };
       websocket_api.methods.sendMessage(this.websocketCon, wsMessage);
